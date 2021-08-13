@@ -16,6 +16,7 @@ public class Model {
 		this.statusText = new SimpleStringProperty() ;
 		
 		this.board = new Board(SIZE);
+		this.board.reset() ; //messa da me per iniziare subito con lettere 
 		DizionarioDAO dao = new DizionarioDAO() ;
 		this.dizionario = dao.listParola() ;
 		statusText.set(String.format("%d parole lette", this.dizionario.size())) ;
