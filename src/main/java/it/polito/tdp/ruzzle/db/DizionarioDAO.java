@@ -40,5 +40,65 @@ public class DizionarioDAO {
 		return result ;
 
 	}
+	
+	public boolean controlloPrefisso(String inizio) {
+		
+		boolean result = false;
+		
+		String query = "SELECT nome FROM parola WHERE nome LIKE ?" ;
+		
+		try {
+			Connection conn = DBConnect.getConnection() ;
+			PreparedStatement st = conn.prepareStatement(query) ;
+			
+			st.setString(1, inizio+'%');
+			
+			ResultSet res = st.executeQuery() ;
+			
+			if(res.next()) {
+				result=true;
+			}
+			
+			res.close();
+			conn.close();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+
+	}
+	
+	public boolean controlloParola(String parola) {
+			
+			boolean result = false;
+			
+			String query = "SELECT nome FROM parola WHERE nome = ?" ;
+			
+			try {
+				Connection conn = DBConnect.getConnection() ;
+				PreparedStatement st = conn.prepareStatement(query) ;
+				
+				st.setString(1, parola);
+				
+				ResultSet res = st.executeQuery() ;
+				
+				if(res.next()) {
+					result=true;
+				}
+				
+				res.close();
+				conn.close();
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return result;
+	
+		}
 
 }

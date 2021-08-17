@@ -92,6 +92,8 @@ public class FXMLController {
     @FXML
     void handleProva(ActionEvent event) {
     	
+    	this.txtResult.clear();
+    	
     	//refresh interfaccia grafica
     	for(Button b : letters.values()) {
     		b.setDefaultButton(false);
@@ -111,6 +113,8 @@ public class FXMLController {
     	
     	List<Pos> percorso = model.trovaParola(parola);
     	
+    	System.out.println(percorso);
+    	
     	if(percorso != null) {
     		for(Pos p : percorso) {
     			letters.get(p).setDefaultButton(true);
@@ -123,6 +127,11 @@ public class FXMLController {
 
     @FXML
     void handleReset(ActionEvent event) {
+    	
+    	for(Button b : letters.values()) {
+    		b.setDefaultButton(false);
+    	}
+    	this.txtResult.clear();
     	model.reset();
     }
     
@@ -131,10 +140,13 @@ public class FXMLController {
     	List<String> tutte = model.trovaTutte();
     	
     	txtResult.clear();
-    	txtResult.appendText(String.format("Ho trovato %d soluzioni\n", tutte.size()));
-    	for(String s : tutte) {
-    		txtResult.appendText(s + "\n");
-    	}
+    	
+    	if(tutte!=null)
+    		{txtResult.appendText(String.format("Ho trovato %d soluzioni\n", tutte.size()));
+		    	for(String s : tutte) {
+		    		txtResult.appendText(s + "\n");
+		    	}
+    		}
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

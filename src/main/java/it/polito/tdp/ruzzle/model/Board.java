@@ -71,9 +71,9 @@ public class Board {
 			
 			//TODO: migliorare l'assegnazione secondo la probabiltà di ogni lettetera di essere utilizzata nella lingua italiana
 			int random = (int)(Math.random()*26) ;
-			String letter = Character.toString((char)('A'+random)) ;
+			String letter = Character.toString((char)('A'+random)) ; //generatore di caratteri random non so come funzioni (nello specifico, a leggere ce la faccio ancora...)
 			
-			//grazie al "binding" fatto in FXMLController, la "set" modifica direttamente il testo del botone collegato alla posizione corrente
+			//grazie al "binding" fatto in FXMLController, la "set" modifica direttamente il testo del bottone collegato alla posizione corrente //
 			this.cells.get(p).set(letter); 
 		}
 	}
@@ -83,7 +83,11 @@ public class Board {
 	 * @param p
 	 * @return
 	 */
+	
+	// da studiare
 	public List<Pos> getAdjacencies(Pos p) {
+		
+		
 		List<Pos> result = new ArrayList<>() ;
 		
 		for(int r = -1; r<=1; r++) {
