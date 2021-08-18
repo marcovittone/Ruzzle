@@ -69,12 +69,31 @@ public class Board {
 	public void reset() {
 		for(Pos p: this.positions) {
 			
-			//TODO: migliorare l'assegnazione secondo la probabiltà di ogni lettetera di essere utilizzata nella lingua italiana
-			int random = (int)(Math.random()*26) ;
-			String letter = Character.toString((char)('A'+random)) ; //generatore di caratteri random non so come funzioni (nello specifico, a leggere ce la faccio ancora...)
+//			//TODO: migliorare l'assegnazione secondo la probabiltà di ogni lettetera di essere utilizzata nella lingua italiana
+//			int random = (int)(Math.random()*26) ;
+//			String letter = Character.toString((char)('A'+random)) ; //generatore di caratteri random non so come funzioni (nello specifico, a leggere ce la faccio ancora...)
+//			
+//			//grazie al "binding" fatto in FXMLController, la "set" modifica direttamente il testo del bottone collegato alla posizione corrente //
+//			this.cells.get(p).set(letter);
 			
-			//grazie al "binding" fatto in FXMLController, la "set" modifica direttamente il testo del bottone collegato alla posizione corrente //
-			this.cells.get(p).set(letter); 
+			this.cells.get(new Pos(0,0)).set("N");
+			this.cells.get(new Pos(0,1)).set("A");
+			this.cells.get(new Pos(0,2)).set("S");
+			this.cells.get(new Pos(0,3)).set("P");
+			this.cells.get(new Pos(1,0)).set("M");
+			this.cells.get(new Pos(1,1)).set("S");
+			this.cells.get(new Pos(1,2)).set("Z");
+			this.cells.get(new Pos(1,3)).set("B");
+			this.cells.get(new Pos(2,0)).set("V");
+			this.cells.get(new Pos(2,1)).set("S");
+			this.cells.get(new Pos(2,2)).set("Q");
+			this.cells.get(new Pos(2,3)).set("C");
+			this.cells.get(new Pos(3,0)).set("I");
+			this.cells.get(new Pos(3,1)).set("R");
+			this.cells.get(new Pos(3,2)).set("Z");
+			this.cells.get(new Pos(3,3)).set("D");
+		
+			
 		}
 	}
 	

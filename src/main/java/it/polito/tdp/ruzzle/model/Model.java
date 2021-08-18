@@ -94,11 +94,19 @@ public class Model {
 					posizioni.add(p);
 					if(this.cerca(livello+1, parola, posizioni))
 						return true;
+					posizioni.remove(posizioni.size()-1);
 				}
 			}
 		}
 		
 		return false;
 
+	}
+	
+	public boolean parolaValida (String parola) {
+		
+		if(this.dizionario.contains(parola))
+			return true;
+		return false;
 	}
 }
