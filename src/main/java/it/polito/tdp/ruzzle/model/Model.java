@@ -60,66 +60,45 @@ public class Model {
 
 	public List<Pos> trovaParola(String parola) {
 		
-		this.paroleValide = new ArrayList<String>();
-		this.paroleValideMap = new HashMap<String,List<Pos>>();
-		this.cerca(0, "", new ArrayList<Pos>(this.board.getPositions()),new ArrayList<Pos>());
+		for(Pos p: this.board.getPositions())
+		{
+			if(this.board.getCellValueProperty(p).get().charAt(0) == parola.charAt(0))
+			{
+				List<Pos> posizioni = new ArrayList<Pos>();
+				posizioni.add(p);
+				if(this.cerca(1, parola, posizioni))
+					return posizioni;
+					
+			}
+		}
 		
-		if(this.paroleValideMap.containsKey(parola))
-			return this.paroleValideMap.get(parola);
-		else
-			return null;
+		return null;
 	}
 
 	public List<String> trovaTutte() {
-
-		this.paroleValide = new ArrayList<String>();
-		this.paroleValideMap = new HashMap<String,List<Pos>>();
-		this.cerca(0, "", new ArrayList<Pos>(this.board.getPositions()),new ArrayList<Pos>());
-		return this.paroleValide;
+		return null;
 	}
 
-	private void cerca(int livello, String parziale, List<Pos> posizioni,List <Pos>posParziale) {
-
-		for (Pos p : posizioni) {
+	private boolean cerca(int livello, String parola, List<Pos> posizioni) {
+		
+		if(livello == parola.length())
+			return true;
+		else
+		{
+			List<Pos> ad = this.board.getAdjacencies(posizioni.get(posizioni.size()-1));
 			
-			
-			if(!posParziale.contains(p))
-				{	this.paroleInsensate = 0;
-					List<Pos> adiacenti = this.board.getAdjacencies(p);
-		
-					for (Pos pos : adiacenti) {
-						
-						if(!posParziale.contains(pos))
-						{
-							String nuovaParziale = parziale.concat(this.board.getCellValueProperty(p).get().concat(this.board.getCellValueProperty(pos).get()));
-						
-							
-							if (this.dao.controlloPrefisso(nuovaParziale)) {
-								
-								posParziale.add(p);
-								posParziale.add(pos);
-								if (this.dao.controlloParola(nuovaParziale)) {
-									this.paroleValide.add(nuovaParziale);
-									this.paroleValideMap.put(nuovaParziale, new ArrayList<Pos>(posParziale));
-								}
-								List<Pos> tempPosizioni = new ArrayList<Pos>(this.board.getAdjacencies(pos));
-								//int i=tempPosizioni.indexOf(p);
-								//tempPosizioni.remove(p);
-								this.cerca(livello + 1, nuovaParziale, tempPosizioni,posParziale);
-								//tempPosizioni.add(i, p);
-								posParziale.remove(pos);
-								posParziale.remove(p);
-								
-							}
-						} else
-							this.paroleInsensate++;
-		
-						if (this.paroleInsensate == adiacenti.size())
-							return;
-		
-					}
+			for(Pos p: ad)
+			{
+				if(!posizioni.contains(p) && parola.charAt(livello)== this.board.getCellValueProperty(p).get().charAt(0))
+				{
+					posizioni.add(p);
+					if(this.cerca(livello+1, parola, posizioni))
+						return true;
 				}
+			}
 		}
+		
+		return false;
 
 	}
 }
